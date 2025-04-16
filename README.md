@@ -42,3 +42,24 @@ This is a Pokemon battle application where each Pokemon has different stats such
 
 - `backend/`: NestJS server with Typeorm and SQLite
 - `frontend/`: Flutter application
+
+## Migrations
+
+```bash
+# create
+npm run migration:create --name=NameMigration
+
+# update
+npm run migration:generate --name=NameMigration
+
+# run pending migrations
+npm run migration:run
+
+# revert last migration
+npm run migration:revert
+```
+
+### Current migrations
+
+- **CreatePokemonTable**: Creates the initial Pokemon table structure
+- **SeedPokemon**: Loads initial Pokemon data from JSON file
