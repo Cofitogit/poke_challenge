@@ -3,7 +3,7 @@ import { DataSourceOptions } from 'typeorm';
 import { join } from 'path';
 
 /**
- * Configuración centralizada para la base de datos SQLite
+ * Centralized configuration for SQLite database
  */
 export const databaseConfig = registerAs(
   'database',
@@ -14,6 +14,6 @@ export const databaseConfig = registerAs(
     migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
     synchronize: process.env.NODE_ENV !== 'production',
     migrationsRun: true,
-    logging: process.env.NODE_ENV !== 'production',
+    logging: false,
   }),
 );
