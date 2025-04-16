@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PokemonModule } from './pokemon/pokemon.module';
+import { BattleModule } from './battle/battle.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
       synchronize: true, //! remove when finished
     }),
     PokemonModule,
+    BattleModule,
   ],
 })
 export class AppModule {}
