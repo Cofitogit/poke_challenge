@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { BattleModule } from './battle/battle.module';
+import { ProxyModule } from './proxy/proxy.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { BattleModule } from './battle/battle.module';
     }),
     PokemonModule,
     BattleModule,
+    ProxyModule,
   ],
 })
 export class AppModule {}
