@@ -63,6 +63,7 @@ npm run migration:revert
 
 - **CreatePokemonTable**: Creates the initial Pokemon table structure
 - **SeedPokemon**: Loads initial Pokemon data from JSON file
+- **CreateBattleTable**: Creates the Battle table structure
 
 ### Steps to run the Project
 
