@@ -63,3 +63,90 @@ npm run migration:revert
 
 - **CreatePokemonTable**: Creates the initial Pokemon table structure
 - **SeedPokemon**: Loads initial Pokemon data from JSON file
+
+### Steps to run the Project
+
+#### Backend Setup
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Install all required dependencies
+npm install
+
+# Copy the environment configuration file
+# This file contains database settings and other configurations
+cp .env.example .env
+
+# Start the development server with hot-reload enabled
+# This will compile the TypeScript code and run migrations automatically
+npm run start:dev
+```
+
+#### Frontend Setup
+```bash
+# Open a new terminal window/tab
+
+# Navigate to the frontend directory
+cd frontend
+
+# Install all Flutter dependencies
+flutter pub get
+
+# Run the application in a Chrome browser
+flutter run -d chrome
+```
+
+#### Verifying the Setup
+- Backend should be running on http://localhost:3000
+- Frontend should open automatically in your Chrome browser
+- If you encounter any issues with the database, ensure migrations have run successfully
+
+
+### Versions Used
+- Node.js: v18.x
+- Flutter: v3.27.4
+
+
+#### Using FVM (Flutter Version Management)
+If you're using FVM to manage Flutter versions, follow these steps instead:
+
+```bash
+cd frontend
+# Install the specific Flutter version required for this project
+fvm install 3.27.4
+
+# Set this version as the one to use for this project
+fvm use 3.27.4
+
+# Get dependencies using FVM
+fvm flutter pub get
+
+# Run the application with FVM
+fvm flutter run -d chrome
+```
+
+This ensures you're using the correct Flutter version for this project regardless of your global Flutter installation.
+
+#### Using NVM (Node Version Management)
+If you're using NVM to manage Node.js versions, follow these steps instead:
+
+```bash
+# Navigate to the backend directory
+cd backend
+
+# Install the specific Node.js version required for this project
+nvm install 18.20.4
+
+# Set this version as the one to use for this project
+nvm use 18.20.4
+
+# Install dependencies using npm
+npm install
+
+# Start the development server
+npm run start:dev
+```
+
+This ensures you're using the correct Node.js version for this project, which prevents compatibility issues with dependencies.
+
