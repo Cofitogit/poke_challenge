@@ -13,7 +13,7 @@ export const databaseConfig = registerAs(
     entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
     migrations: [join(__dirname, '../migrations/*{.ts,.js}')],
     synchronize: process.env.NODE_ENV !== 'production',
-    migrationsRun: true,
+    migrationsRun: process.env.NODE_ENV !== 'production',
     logging: false,
   }),
 );
