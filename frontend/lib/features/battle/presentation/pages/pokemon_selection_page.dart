@@ -139,10 +139,8 @@ class _PokemonSelectionPageState extends State<PokemonSelectionPage> {
                       },
                     ),
                   ),
-                  // Área de la batalla
                   if (_selectedPokemon != null)
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
                       child: Consumer<BattleProvider>(
                         builder: (context, battleProvider, child) {
                           if (battleProvider.state == BattleState.completed && battleProvider.battleResult != null) {
@@ -185,9 +183,7 @@ class _PokemonSelectionPageState extends State<PokemonSelectionPage> {
                                     ),
                                   ),
                                 ),
-                                Expanded(
-                                  child: _buildBattleArea(battleProvider),
-                                ),
+                                _buildBattleArea(battleProvider),
                               ],
                             );
                           }
@@ -208,16 +204,15 @@ class _PokemonSelectionPageState extends State<PokemonSelectionPage> {
   Widget _buildBattleArea(BattleProvider battleProvider) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // Pokemon selected by the user
-          Expanded(child: PokemonStatsCard(pokemon: _selectedPokemon!)),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final bool isVerticalLayout = constraints.maxWidth < 600;
           
-          // Battle button
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          final battleButton = Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isVerticalLayout ? 0 : 16.0,
+              vertical: isVerticalLayout ? 16.0 : 0,
+            ),
             child: Container(
               decoration: const BoxDecoration(
                 boxShadow: [
@@ -251,15 +246,41 @@ class _PokemonSelectionPageState extends State<PokemonSelectionPage> {
                 ),
               ),
             ),
-          ),
+          );
           
-          // Opponent pokemon (or placeholder)
-          Expanded(
+          final userPokemonCard = ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 400, maxWidth: 300),
+            child: PokemonStatsCard(pokemon: _selectedPokemon!),
+          );
+          
+          final opponentPokemonCard = ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 400, maxWidth: 300),
             child: battleProvider.opponentPokemon != null 
-              ? PokemonStatsCard(pokemon: battleProvider.opponentPokemon!, isOpponent: true)
+              ? PokemonStatsCard(pokemon: battleProvider.opponentPokemon!)
               : const PlaceholderStatsCard(),
-          ),
-        ],
+          );
+          
+          if (isVerticalLayout) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                userPokemonCard,
+                battleButton,
+                opponentPokemonCard,
+              ],
+            );
+          } else {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Flexible(child: userPokemonCard),
+                battleButton,
+                Flexible(child: opponentPokemonCard),
+              ],
+            );
+          }
+        },
       ),
     );
   }

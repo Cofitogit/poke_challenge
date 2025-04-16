@@ -5,12 +5,10 @@ import 'package:frontend/features/battle/presentation/widgets/stat_bar.dart';
 
 class PokemonStatsCard extends StatelessWidget {
   final Pokemon pokemon;
-  final bool isOpponent;
 
   const PokemonStatsCard({
     super.key,
     required this.pokemon,
-    this.isOpponent = false,
   });
 
   @override
